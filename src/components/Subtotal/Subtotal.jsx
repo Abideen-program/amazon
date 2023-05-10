@@ -6,7 +6,7 @@ function Subtotal() {
     <>
       <div className={classes.subtotal}>
         <p className={classes.sub}>
-          Subtotal (6 items): <span>$1,206.96</span>
+          Subtotal (0 items): <span>$00.00</span>
         </p>
         <div className={classes.checkbox}>
           <input type="checkbox" />
