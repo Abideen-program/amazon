@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Basket.module.css";
+import CheckoutProduct from "../Checkout/CheckoutProduct";
 
 const Basket = () => {
   return (
@@ -26,6 +27,8 @@ const Basket = () => {
           <button>Proceed to Checkout</button>
         </div>
       </div>
+
+      <CheckoutProduct />
     </div>
   );
 };
