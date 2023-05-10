@@ -1,16 +1,18 @@
 .basket {
-  padding: 20px;
   width: 100%;
+  background-color: white;
+  height: max-content;
 }
 
 .checkout-header {
   display: flex;
   width: 100%;
+  padding: 20px;
 }
 
 .image {
   width: 100%;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   display: block;
   flex: 1;
 }
@@ -20,45 +22,5 @@
 }
 
 .image img {
-  width: 100%;
-}
-
-.subtotal {
-  background: #b5b4b4;
-  padding: 10px;
-  border: 1px solid #111;
-  border-radius: 4px;
-  min-width: 250px;
-}
-
-.sub {
-  font-size: 13px;
-  margin-bottom: 5px;
-}
-
-.sub span {
-  font-weight: bold;
-}
-
-.checkbox {
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 10px 0;
-}
-
-.checkbox input {
-  margin-right: 3px;
-}
-
-.subtotal button {
-  background-color: #f0c14b;
-  border: 1px solid;
-  border-color: #a88734 #9c7e31 #846a29;
-  cursor: pointer;
-  outline: none;
-  color: #111;
-  padding: 5px;
   width: 100%;
 }

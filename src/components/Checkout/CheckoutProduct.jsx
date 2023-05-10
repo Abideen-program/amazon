@@ -3,7 +3,7 @@ import classes from "./CheckoutProduct.module.css";
 
 function CheckoutProduct() {
   return (
-    <>
+    <div className={classes.contianer}>
       <div className={classes["checkout-product"]}>
         <div className={classes["checkout-image"]}>
           <img
@@ -28,7 +28,7 @@ function CheckoutProduct() {
           <button>Remove from Basket</button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
