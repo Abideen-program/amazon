@@ -4,13 +4,13 @@ import { MdSearch, MdShoppingBasket } from "react-icons/md";
 const Header = () => {
   return (
     <div className={classes.header}>
-      <div className={classes.logo}>
-        <img
-          className={classes["logo-image"]}
-          src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
-          alt="amazon-icon"
-        />
-      </div>
+      {/* <div className={classes.logo}> */}
+      <img
+        className={classes["logo-image"]}
+        src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+        alt="amazon-icon"
+      />
+      {/* </div> */}
 
       <div className={classes["header-search"]}>
         <input className={classes["search-input"]} type="text" />

@@ -11,14 +11,14 @@
   z-index: 100;
 }
 
-.logo {
+/* .logo {
   width: 100px;
-  margin-right: 20px;
-  margin-top: 18px;
-}
+} */
 
 .logo-image {
-  width: 100%;
+  margin-top: 18px;
+  width: 100px;
+  margin-right: 20px;
   object-fit: contain;
 }
 
@@ -71,6 +71,7 @@
 
 .header-basket {
   position: relative;
+  cursor: pointer;
 }
 
 .basket {
