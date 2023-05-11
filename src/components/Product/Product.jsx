@@ -24,7 +24,7 @@ const Product = ({ id, title, image, price, rating }) => {
         <p className={classes.title}>{title}</p>
         <p className={classes["product-price"]}>
           <small>$</small>
-          <strong>{price}</strong>
+          <strong>{price.toFixed(2)}</strong>
         </p>
         <p className={classes["product-rating"]}>
           <span>

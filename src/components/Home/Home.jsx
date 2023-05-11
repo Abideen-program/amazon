@@ -1,8 +1,21 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import classes from "./Home.module.css";
 import Product from "../Product/Product";
+import { setCount } from "../Store/Features/BasketSlice";
 
 const Home = () => {
+  const basket = useSelector((state) => state.basket.basket);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const count = basket.reduce((total, current) => {
+      return total + current.quantity;
+    }, 0);
+    dispatch(setCount(count));
+  }, [basket]);
+
   return (
     <div className={classes.home}>
       <div className={classes["home-container"]}>

@@ -2,7 +2,10 @@ import React from "react";
 import classes from "./Header.module.css";
 import { MdSearch, MdShoppingBasket } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Header = () => {
+  const count = useSelector((state) => state.basket.basketCount);
   return (
     <>
       <div className={classes.header}>
@@ -39,10 +42,10 @@ const Header = () => {
             <span className={classes["option-two"]}>Prime</span>
           </div>
 
-          <Link to='basket'>
+          <Link to="basket">
             <div className={classes["header-basket"]}>
               <MdShoppingBasket className={classes.basket} />
-              <span className={classes["basket-count"]}>0</span>
+              <span className={classes["basket-count"]}>{count}</span>
             </div>
           </Link>
         </div>
