@@ -8,12 +8,25 @@ const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
-      state.basket = action.payload;
+    addToBasket: (state, action) => {
+      const existingItem = state.basket.find((item) => {
+        return item.id === action.payload.id;
+      });
+
+      if (existingItem) {
+        const newBasket = state.basket.map((item) => {
+          return item.id === action.payload.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item;
+        });
+        state.basket = newBasket;
+      } else {
+        state.basket = [...state.basket, { ...action.payload, quantity: 1 }];
+      }
     },
   },
 });
 
 export default basketSlice.reducer;
 
-export const { addToCart } = basketSlice.actions;
+export const { addToBasket } = basketSlice.actions;

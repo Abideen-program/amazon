@@ -1,8 +1,25 @@
-import React from "react";
 import classes from "./Product.module.css";
-import { MdShoppingCart } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBasket } from "../Store/Features/BasketSlice";
 
-const Product = ({ title, image, price, rating }) => {
+const Product = ({ id, title, image, price, rating }) => {
+  const dispatch = useDispatch();
+  const basket = useSelector((state) => state.basket.basket);
+  // const [items, setItems] = useState([]);
+  console.log(basket);
+
+  const addToBasketHandler = () => {
+    dispatch(
+      addToBasket({
+        id,
+        title,
+        image,
+        price,
+        rating,
+      })
+    );
+  };
+
   return (
     <div className={classes.product}>
       <div className={classes["product-info"]}>
@@ -12,22 +29,19 @@ const Product = ({ title, image, price, rating }) => {
           <strong>{price}</strong>
         </p>
         <p className={classes["product-rating"]}>
-          <p>
+          <span>
             {Array(rating)
               .fill()
               .map((_, i) => {
-                return <span>🌟</span>;
+                return <span key={i}>🌟</span>;
               })}
-          </p>
+          </span>
         </p>
       </div>
 
       <img src={image} alt="" />
 
-      <button>
-        {/* <MdShoppingCart className={classes.cart} /> */}
-        Add to Basket
-      </button>
+      <button onClick={addToBasketHandler}>Add to Basket</button>
     </div>
   );
 };
