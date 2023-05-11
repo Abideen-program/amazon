@@ -5,7 +5,6 @@ import CheckoutProduct from "./CheckoutProduct";
 
 function Checkout() {
   const basket = useSelector((state) => state.basket.basket);
-  console.log(basket);
   return (
     <div className={classes.contianer}>
       {basket &&
