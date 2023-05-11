@@ -1,11 +1,11 @@
 import React from "react";
 import classes from "./CheckoutProduct.module.css";
-import { addToBasket } from "../Store/Features/BasketSlice";
+import { addToBasket, removeFromBasket } from "../Store/Features/BasketSlice";
 import { useDispatch } from "react-redux";
 
 const CheckoutProduct = ({ item }) => {
   const dispatch = useDispatch();
-  
+
   const { image, price, quantity, rating, title } = item;
   return (
     <div className={classes["checkout-product"]}>
@@ -30,7 +30,7 @@ const CheckoutProduct = ({ item }) => {
 
         <button onClick={() => dispatch(addToBasket(item))}>+</button>
         <span className={classes.quantity}>{quantity}</span>
-        <button>-</button>
+        <button onClick={() => dispatch(removeFromBasket(item))}>-</button>
         <button>Remove from Basket</button>
       </div>
     </div>
