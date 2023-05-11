@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Subtotal.module.css";
+import Button from "../Button/Button";
 
 function Subtotal() {
   return (
@@ -13,7 +14,7 @@ function Subtotal() {
           <label htmlFor="">This order contains a gift</label>
         </div>
 
-        <button>Proceed to Checkout</button>
+        <Button type={true}>Proceed to Checkout</Button>
       </div>
     </>
   );

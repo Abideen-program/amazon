@@ -1,6 +1,10 @@
 import React from "react";
 import classes from "./CheckoutProduct.module.css";
-import { addToBasket, removeFromBasket } from "../Store/Features/BasketSlice";
+import {
+  addToBasket,
+  reduceQuantity,
+  removeFromBasket,
+} from "../Store/Features/BasketSlice";
 import { useDispatch } from "react-redux";
 
 const CheckoutProduct = ({ item }) => {
@@ -30,8 +34,10 @@ const CheckoutProduct = ({ item }) => {
 
         <button onClick={() => dispatch(addToBasket(item))}>+</button>
         <span className={classes.quantity}>{quantity}</span>
-        <button onClick={() => dispatch(removeFromBasket(item))}>-</button>
-        <button>Remove from Basket</button>
+        <button onClick={() => dispatch(reduceQuantity(item))}>-</button>
+        <button onClick={() => dispatch(removeFromBasket(item))}>
+          Remove from Basket
+        </button>
       </div>
     </div>
   );

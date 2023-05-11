@@ -25,7 +25,7 @@ const basketSlice = createSlice({
       }
     },
 
-    removeFromBasket: (state, action) => {
+    reduceQuantity: (state, action) => {
       const existingItem = state.basket.find((item) => {
         return item.id === action.payload.id;
       });
@@ -46,9 +46,21 @@ const basketSlice = createSlice({
         state.basket = newBasket;
       }
     },
+
+    removeFromBasket: (state, action) => {
+      const newBasket = state.basket.filter((item) => {
+        return item.id !== action.payload.id;
+      });
+      state.basket = newBasket;
+    },
+
+    clearBasket: (state) => {
+      state.basket = [];
+    },
   },
 });
 
 export default basketSlice.reducer;
 
-export const { addToBasket, removeFromBasket } = basketSlice.actions;
+export const { addToBasket, reduceQuantity, removeFromBasket, clearBasket } =
+  basketSlice.actions;
