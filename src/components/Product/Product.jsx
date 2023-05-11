@@ -5,8 +5,6 @@ import { addToBasket } from "../Store/Features/BasketSlice";
 const Product = ({ id, title, image, price, rating }) => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basket);
-  // const [items, setItems] = useState([]);
-  console.log(basket);
 
   const addToBasketHandler = () => {
     dispatch(

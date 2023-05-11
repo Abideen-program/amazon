@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Basket.module.css";
-import CheckoutProduct from "../Checkout/CheckoutProduct";
+import Checkout from "../Checkout/Checkout";
 import Subtotal from "../Subtotal/Subtotal";
 
 const Basket = () => {
@@ -19,7 +19,7 @@ const Basket = () => {
         <Subtotal />
       </div>
 
-      <CheckoutProduct />
+      <Checkout />
     </div>
   );
 };
