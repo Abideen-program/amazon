@@ -27,10 +27,12 @@ const Header = () => {
         </div>
 
         <div className={classes["header-options"]}>
-          <div className={classes["header-option"]}>
-            <span className={classes["option-one"]}>Hello Guest</span>
-            <span className={classes["option-two"]}>Sign in</span>
-          </div>
+          <Link to='login'>
+            <div className={classes["header-option"]}>
+              <span className={classes["option-one"]}>Hello Guest</span>
+              <span className={classes["option-two"]}>Sign in</span>
+            </div>
+          </Link>
 
           <div className={classes["header-option"]}>
             <span className={classes["option-one"]}>Returns</span>
