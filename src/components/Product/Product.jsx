@@ -1,11 +1,11 @@
 import classes from "./Product.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addToBasket } from "../Store/Features/BasketSlice";
+import { addToBasket, setAddNotification } from "../Store/Features/BasketSlice";
 
 const Product = ({ id, title, image, price, rating }) => {
   const dispatch = useDispatch();
   const basket = useSelector((state) => state.basket.basket);
-
+  
   const addToBasketHandler = () => {
     dispatch(
       addToBasket({
@@ -16,6 +16,13 @@ const Product = ({ id, title, image, price, rating }) => {
         rating,
       })
     );
+
+    dispatch(setAddNotification(true));
+
+    const timer = setTimeout(() => {
+      dispatch(setAddNotification(false));
+      clearTimeout(timer);
+    }, 1000);
   };
 
   return (

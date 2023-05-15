@@ -4,13 +4,45 @@ import {
   addToBasket,
   reduceQuantity,
   removeFromBasket,
+  setAddNotification,
+  setRemoveNotification,
 } from "../Store/Features/BasketSlice";
 import { useDispatch } from "react-redux";
 
 const CheckoutProduct = ({ item }) => {
   const dispatch = useDispatch();
-
   const { image, price, quantity, rating, title } = item;
+
+  //increase the quantity handler
+  const increaseQuantityHandler = () => {
+    //this handles increament of the quantity
+    dispatch(addToBasket(item));
+
+    //this handles setting of add notification
+    dispatch(setAddNotification(true));
+
+    //this clears notification
+    const timer = setTimeout(() => {
+      dispatch(setAddNotification(false));
+      clearTimeout(timer);
+    }, 1000);
+  };
+
+  //reduce the quantity handler
+  const reduceQuantityHandler = () => {
+    //this handles reduction of the quantity
+    dispatch(reduceQuantity(item));
+
+    //this handles setting of remove notification
+    dispatch(setRemoveNotification(true));
+
+    //this clears notification
+    const timer = setTimeout(() => {
+      dispatch(setRemoveNotification(false));
+      clearTimeout(timer);
+    }, 1000);
+  };
+
   return (
     <div className={classes["checkout-product"]}>
       <div className={classes["checkout-image"]}>
@@ -32,9 +64,9 @@ const CheckoutProduct = ({ item }) => {
             })}
         </p>
 
-        <button onClick={() => dispatch(addToBasket(item))}>+</button>
+        <button onClick={increaseQuantityHandler}>+</button>
         <span className={classes.quantity}>{quantity}</span>
-        <button onClick={() => dispatch(reduceQuantity(item))}>-</button>
+        <button onClick={reduceQuantityHandler}>-</button>
         <button onClick={() => dispatch(removeFromBasket(item))}>
           Remove from Basket
         </button>

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Basket from "./components/Basket/Basket";
+import AddItem from "./components/Alert/addItem";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -18,6 +19,7 @@ const App = () => {
 
   return (
     <>
+    <AddItem />
       <RouterProvider router={router} />
     </>
   );

@@ -14,6 +14,7 @@ html {
 body {
   background-color: rgb(234, 237, 237);
   font-family: "Roboto", sans-serif;
+  position: relative;
 }
 
 a {
