@@ -10,8 +10,6 @@ import { setUser } from "../Store/Features/UserSlice";
 
 const Home = () => {
   const basket = useSelector((state) => state.basket.basket);
-  const user = useSelector((state) => state.user.user);
-  console.log(user);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -1,11 +1,28 @@
 import React from "react";
-import classes from "./Header.module.css";
 import { MdSearch, MdShoppingBasket } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+
+import { nameFormater } from "../Utils/nameFormatter";
+import { auth } from "../../firebaseConfig";
+import classes from "./Header.module.css";
 
 const Header = () => {
   const count = useSelector((state) => state.basket.basketCount);
+  const user = useSelector((state) => state.user.user);
+
+  let newName = "";
+
+  //helper function to help get name from the user eamil
+  if (user) {
+    newName = nameFormater(user && user.email);
+  }
+
+  const signOutHandler = () => {
+    signOut(auth);
+  };
+
   return (
     <>
       <div className={classes.header}>
@@ -27,10 +44,14 @@ const Header = () => {
         </div>
 
         <div className={classes["header-options"]}>
-          <Link to='login'>
-            <div className={classes["header-option"]}>
-              <span className={classes["option-one"]}>Hello Guest</span>
-              <span className={classes["option-two"]}>Sign in</span>
+          <Link to={!user && "login"}>
+            <div onClick={signOutHandler} className={classes["header-option"]}>
+              <span className={classes["option-one"]}>
+                {!user ? "Hello Guest" : newName}
+              </span>
+              <span className={classes["option-two"]}>
+                {!user ? "Sign in" : "Sign out"}
+              </span>
             </div>
           </Link>
 
