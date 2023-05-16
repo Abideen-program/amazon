@@ -1,8 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebaseConfig";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
 import classses from "./Login.module.css";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const signinHandler = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        console.log(response);
+
+        if (response) {
+          navigate("/");
+        }
+      })
+      .catch((error) => alert(error.message));
+    setEmail("");
+    setPassword("");
+  };
+
+  const registerHandler = (e) => {
+    e.preventDefault();
+    if (email.trim().length === 0 && password.trim().length === 0) return;
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((response) => {
+        if (response) {
+          navigate("/");
+        }
+        console.log(response);
+      })
+      .catch((error) => alert(error.message));
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <div className={classses.wrapper}>
       <div className={classses.login}>
@@ -19,15 +59,31 @@ const Login = () => {
             <h1>Sign-in</h1>
             <div className={classses["control-group"]}>
               <label htmlFor="email">E-mail</label>
-              <input id="email" type="email" />
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
 
             <div className={classses["control-group"]}>
               <label htmlFor="password">Password</label>
-              <input id="password" type="password" />
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
 
-            <button className={classses.button}>Sign In</button>
+            <button
+              type="submit"
+              className={classses.button}
+              onClick={signinHandler}
+            >
+              Sign In
+            </button>
 
             <p className={classses.notice}>
               By signing-in you agree to Amazon's Conditions of Use & Sale.
@@ -35,8 +91,12 @@ const Login = () => {
               Internet-Based Notice.
             </p>
 
-            <button className={classses.create}>
-              Create your Amazon Account{" "}
+            <button
+              type="submit"
+              className={classses.create}
+              onClick={registerHandler}
+            >
+              Create your Amazon Account
             </button>
           </div>
         </form>
