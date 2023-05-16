@@ -1,13 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {}
+import { auth } from "../../firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
 
 import classes from "./Home.module.css";
 import Product from "../Product/Product";
 import { setCount } from "../Store/Features/BasketSlice";
+import { setUser } from "../Store/Features/UserSlice";
 
 const Home = () => {
   const basket = useSelector((state) => state.basket.basket);
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,6 +20,24 @@ const Home = () => {
     }, 0);
     dispatch(setCount(count));
   }, [basket]);
+
+  //this will handle getting logged in user when refresh
+  useEffect(() => {
+    onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        console.log("User is logged in");
+        dispatch(
+          setUser({
+            email: authUser.email,
+            name: authUser.displayName,
+            image: authUser.photoURL,
+          })
+        );
+      } else {
+        dispatch(setUser(null));
+      }
+    });
+  }, []);
 
   return (
     <div className={classes.home}>
