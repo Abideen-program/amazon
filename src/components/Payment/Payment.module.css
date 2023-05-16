@@ -1,0 +1,29 @@
+.payment {
+  background: white;
+  width: 100%;
+  /* height: calc(100vh - 70px); */
+  height: fit-content;
+  border: 3px solid red;
+}
+.payment > a h2 {
+  background: rgb(234, 237, 237);
+  color: #111;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+}
+
+.payment-section {
+  padding: 20px;
+  display: flex;
+  border-bottom: 2px solid lightgray;
+}
+
+.payment-section-title {
+  flex: 0.15;
+}
+
+.payment-section-description {
+  flex: 0.85;
+  font-size: 14px;
+}

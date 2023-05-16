@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { setTotalPrice } from "../Store/Features/BasketSlice";
 import classes from "./Subtotal.module.css";
-import Button from "../Button/Button";
 
 function Subtotal() {
   const count = useSelector((state) => state.basket.basketCount);
   const totalPrice = useSelector((state) => state.basket.totalPrice);
   const basket = useSelector((state) => state.basket.basket);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const price = basket.reduce((total, current) => {
@@ -27,7 +30,7 @@ function Subtotal() {
           <label htmlFor="">This order contains a gift</label>
         </div>
 
-        <button>Proceed to Checkout</button>
+        <button onClick={() => navigate('/payment')}>Proceed to Checkout</button>
       </div>
     </>
   );

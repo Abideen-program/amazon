@@ -43,6 +43,20 @@ const CheckoutProduct = ({ item }) => {
     }, 1000);
   };
 
+  const removeItemHandler = () => {
+    //this handles removal of the item
+    dispatch(removeFromBasket(item));
+
+    //this handles setting of remove notification
+    dispatch(setRemoveNotification(true));
+
+    //this clears notification
+    const timer = setTimeout(() => {
+      dispatch(setRemoveNotification(false));
+      clearTimeout(timer);
+    }, 1000);
+  };
+
   return (
     <div className={classes["checkout-product"]}>
       <div className={classes["checkout-image"]}>
@@ -67,9 +81,7 @@ const CheckoutProduct = ({ item }) => {
         <button onClick={increaseQuantityHandler}>+</button>
         <span className={classes.quantity}>{quantity}</span>
         <button onClick={reduceQuantityHandler}>-</button>
-        <button onClick={() => dispatch(removeFromBasket(item))}>
-          Remove from Basket
-        </button>
+        <button onClick={removeItemHandler}>Remove from Basket</button>
       </div>
     </div>
   );

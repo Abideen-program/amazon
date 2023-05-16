@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import Basket from "./components/Basket/Basket";
 import AddItem from "./components/Alert/addItem";
 import Login from "./components/Login/Login";
+import Payment from "./components/Payment/Payment";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -14,6 +15,7 @@ const App = () => {
       children: [
         { index: true, element: <Home /> },
         { path: "basket", element: <Basket /> },
+        { path: "payment", element: <Payment /> },
       ],
     },
 
