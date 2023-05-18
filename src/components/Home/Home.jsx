@@ -23,7 +23,6 @@ const Home = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
-        console.log("User is logged in");
         dispatch(
           setUser({
             email: authUser.email,

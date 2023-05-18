@@ -1,7 +1,7 @@
 .payment {
   background: white;
   width: 100%;
-  /* height: calc(100vh - 70px); */
+  min-height: calc(100vh - 70px);
   height: fit-content;
   border: 3px solid red;
 }
@@ -26,4 +26,34 @@
 .payment-section-description {
   flex: 0.85;
   font-size: 14px;
+}
+
+.payment-section-stripe {
+  flex: 0.6;
+  font-size: 14px;
+}
+
+.card-action {
+  margin-top: 20px;
+}
+
+.card-action button {
+  background-color: #f0c14b;
+  border: 1px solid;
+  border-color: #a88734 #9c7e31 #846a29;
+  cursor: pointer;
+  outline: none;
+  color: #111;
+  margin: 10px 0;
+  padding: 5px;
+  width: auto;
+}
+
+.card-action button:disabled {
+  cursor: not-allowed;
+}
+
+.card-error {
+  font-size: 12px;
+  color: red;
 }

@@ -17,8 +17,6 @@ const Login = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
-        console.log(response);
-
         if (response) {
           navigate("/");
         }
