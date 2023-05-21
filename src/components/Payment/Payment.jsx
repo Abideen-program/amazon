@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
+import axiosConfig from '../../axios'
 
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import { setCount, setTotalPrice } from "../Store/Features/BasketSlice";
 import { nameFormater } from "../Utils/nameFormatter";
+import instance from "../../axios";
 import classes from "./Payment.module.css";
 
 function Payment() {
@@ -43,8 +45,8 @@ function Payment() {
   //to get the client secret that will tell the stripe to handle the payment
   useEffect(() => {
     const getClientSecret = async () => {
-      const response = await axios({
-        method: "post",
+      const response = await axiosConfig({
+        method: "POST",
         url: `/payments/create?total=${totalPrice * 100}`,
       });
 
@@ -53,6 +55,8 @@ function Payment() {
 
     getClientSecret();
   }, [basket]);
+
+  console.log(clientSecret)
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -138,7 +142,7 @@ function Payment() {
             <CardElement onChange={changeHandler} />
 
             <div className={classes["card-action"]}>
-              <h3>Order Total: ${totalPrice}</h3>
+              <h3>Order Total: ${totalPrice.toFixed(2)}</h3>
               <button
                 disabled={processing || disabled || !stripe || success || error}
                 type="submit"

@@ -1,19 +1,40 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
-const {onRequest} = require("firebase-functions/v2/https");
+const { onRequest } = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
+const functions = require("firebase-functions");
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+const express = require("express");
+const cors = require("cors");
+const stripe = require("stripe")(
+  "sk_test_51N8Y39BjUsgOzO6MElWYB1b1OBhyv1NTPM8tw6clCM8lV0APmgOPWiozBE8WJYYlzgIoZFMqqQ9XO9YntM3q3JD800RsEOIAZ9"
+);
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+//Setting up the API
+
+//configure the app
+const app = express();
+
+//setup a middleware
+app.use(cors({ origin: true }));
+app.use(express.json());
+
+//API routes
+app.get("/", (request, response) => response.status(200).send("Hello World!"));
+
+app.post("/payments/create", async (request, response) => {
+  const total = request.query.total;
+
+  console.log("Payment Request Recieved for an amount of ", total);
+
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: total,
+    currency: "usd",
+  });
+
+  //OK - PaymentIntent Created
+  response.status(201).send({
+    clientSecret: paymentIntent.client_secret,
+  });
+});
+
+//Listen command
+exports.api = functions.https.onRequest(app);

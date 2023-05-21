@@ -3,7 +3,6 @@
   width: 100%;
   min-height: calc(100vh - 70px);
   height: fit-content;
-  border: 3px solid red;
 }
 .payment > a h2 {
   background: rgb(234, 237, 237);
