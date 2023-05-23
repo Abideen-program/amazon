@@ -3,10 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
-import axiosConfig from '../../axios'
+import axiosConfig from "../../axios";
 
 import CheckoutProduct from "../Checkout/CheckoutProduct";
-import { setCount, setTotalPrice } from "../Store/Features/BasketSlice";
+import {
+  setCount,
+  setTotalPrice,
+  clearBasket,
+} from "../Store/Features/BasketSlice";
 import { nameFormater } from "../Utils/nameFormatter";
 import instance from "../../axios";
 import classes from "./Payment.module.css";
@@ -15,7 +19,7 @@ function Payment() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -47,7 +51,7 @@ function Payment() {
     const getClientSecret = async () => {
       const response = await axiosConfig({
         method: "POST",
-        url: `/payments/create?total=${totalPrice * 100}`,
+        url: `/payments/create?total=${totalPrice.toFixed(2) * 100}`,
       });
 
       setClientSecret(response.data.clientSecret);
@@ -56,7 +60,7 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
-  console.log(clientSecret)
+  console.log(clientSecret);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -81,11 +85,12 @@ function Payment() {
         setError(null);
         setProcessing(false);
         navigate("/order", { replace: true });
+        dispatch(clearBasket());
       });
   };
 
   const changeHandler = (event) => {
-    setDisabled(event.empty);
+    setDisabled(event.complete ? false : true);
     setError(event.error ? event.error.message : "");
   };
 

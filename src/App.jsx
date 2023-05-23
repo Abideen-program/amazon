@@ -1,13 +1,15 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Basket from "./components/Basket/Basket";
 import AddItem from "./components/Alert/addItem";
 import Login from "./components/Login/Login";
 import Payment from "./components/Payment/Payment";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import Order from "./components/Order/Order";
 
 const stripePromise = loadStripe(
   "pk_test_51N8Y39BjUsgOzO6MJ0SY3Dc6plJY87QRWMKOF7l9aiGlUHfZmhYUSnZOUTNWfH2MzTAagskzbSedUMm09fhWZmSk00Hy7CIp9m"
@@ -29,6 +31,7 @@ const App = () => {
             </Elements>
           ),
         },
+        { path: "order", element: <Order /> },
       ],
     },
 
